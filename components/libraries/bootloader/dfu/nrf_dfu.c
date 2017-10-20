@@ -146,6 +146,17 @@ uint32_t nrf_dfu_init()
 
     if(enter_bootloader_mode != 0 || !nrf_dfu_app_is_valid())
     {
+
+      //Configure WDT.
+      // Configure WDT to run when CPU is asleep
+      NRF_WDT->CONFIG       = (WDT_CONFIG_SLEEP_Run << WDT_CONFIG_SLEEP_Pos);
+      // Timeout set to 60 seconds, timeout[s] = (CRV-1)/32768
+      NRF_WDT->CRV          = 1966081;
+      // Enable the RR[0] reload register
+      NRF_WDT->RREN         = WDT_RREN_RR0_Enabled << WDT_RREN_RR0_Pos;
+      // Start the WDT
+      NRF_WDT->TASKS_START  = 1;
+
         timers_init();
         scheduler_init();
 
