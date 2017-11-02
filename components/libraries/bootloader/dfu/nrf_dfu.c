@@ -157,6 +157,7 @@ uint32_t nrf_dfu_init()
       // Start the WDT
       NRF_WDT->TASKS_START  = 1;
 
+        NRF_WDT->RR[0] = WDT_RR_RR_Reload;
         timers_init();
         scheduler_init();
 
