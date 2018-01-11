@@ -132,7 +132,7 @@ $(OUTPUT_DIRECTORY):
 # Create objects from C source files
 $(OUTPUT_DIRECTORY)/%.c.o: | $(OUTPUT_DIRECTORY)
 	@echo Compiling file: $(notdir $($@))
-	$(NO_ECHO)$(CC) -MP -MD -std=c99 $(CFLAGS) $(INC_PATHS) -c -o $@ "$($@)"
+	$(NO_ECHO)$(CC) -MP -MD $(CFLAGS) $(INC_PATHS) -c -o $@ "$($@)"
 
 # Create objects from C++ source files
 $(OUTPUT_DIRECTORY)/%.cpp.o: | $(OUTPUT_DIRECTORY)
